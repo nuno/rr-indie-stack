@@ -5,7 +5,7 @@
 Learn more about [Remix Stacks](https://remix.run/stacks).
 
 ```sh
-npx create-remix@latest --template remix-run/indie-stack
+npx create-react-router@latest --template nuno/rr-indie-stack
 ```
 
 ## What's in the stack
@@ -34,7 +34,7 @@ Click this button to create a [Gitpod](https://gitpod.io) workspace with the pro
 
 ## Development
 
-- First run this stack's `remix.init` script and commit the changes it makes to your project.
+- First run this stack's `rr.init` script and commit the changes it makes to your project.
 
   ```sh
   npx remix init

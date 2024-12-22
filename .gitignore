@@ -1,5 +1,5 @@
 # We don't want lockfiles in stacks, as people could use a different package manager
-# This part will be removed by `remix.init`
+# This part will be removed by `rr.init`
 bun.lockb
 package-lock.json
 pnpm-lock.yaml
@@ -17,4 +17,5 @@ node_modules
 /prisma/data.db
 /prisma/data.db-journal
 
-.react-router/
+# React Router
+/.react-router/

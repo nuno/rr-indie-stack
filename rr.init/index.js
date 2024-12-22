@@ -157,10 +157,10 @@ const main = async ({ packageManager, rootDirectory }) => {
   prodToml.app = prodToml.app.replace(REPLACER, APP_NAME);
 
   const initInstructions = `
-- First run this stack's \`remix.init\` script and commit the changes it makes to your project.
+- First run this stack's \`rr.init\` script and commit the changes it makes to your project.
 
   \`\`\`sh
-  npx remix init
+  npx create-react-router init
   git init # if you haven't already
   git add .
   git commit -m "Initialize project"
@@ -195,7 +195,7 @@ const main = async ({ packageManager, rootDirectory }) => {
     }),
     packageJson.save(),
     fs.copyFile(
-      path.join(rootDirectory, "remix.init", "gitignore"),
+      path.join(rootDirectory, "rr.init", "gitignore"),
       path.join(rootDirectory, ".gitignore"),
     ),
     fs.rm(path.join(rootDirectory, ".github", "ISSUE_TEMPLATE"), {

@@ -1,9 +1,13 @@
-import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 
 import { useOptionalUser } from "~/utils";
 
-export const meta: MetaFunction = () => [{ title: "Remix Notes" }];
+import type { Route } from "./+types/_index";
+
+// eslint-disable-next-line no-empty-pattern
+export function meta({}: Route.MetaArgs) {
+  return [{ title: "React Router Notes" }];
+}
 
 export default function Index() {
   const user = useOptionalUser();

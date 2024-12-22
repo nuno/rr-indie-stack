@@ -1,14 +1,23 @@
-import type { LinksFunction, LoaderFunctionArgs } from "react-router";
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import type { LinksFunction } from "react-router";
+import {
+  isRouteErrorResponse,
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+} from "react-router";
 
 import { getUser } from "~/session.server";
+
+import type { Route } from "./+types/root";
 
 import "~/tailwind.css";
 export const links: LinksFunction = () => [];
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export async function loader({ request }: Route.LoaderArgs) {
   return { user: await getUser(request) };
-};
+}
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -30,4 +39,33 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return <Outlet />;
+}
+
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  let message = "Oops!";
+  let details = "An unexpected error occurred.";
+  let stack: string | undefined;
+
+  if (isRouteErrorResponse(error)) {
+    message = error.status === 404 ? "404" : "Error";
+    details =
+      error.status === 404
+        ? "The requested page could not be found."
+        : error.statusText || details;
+  } else if (import.meta.env.DEV && error && error instanceof Error) {
+    details = error.message;
+    stack = error.stack;
+  }
+
+  return (
+    <main className="container mx-auto p-4 pt-16">
+      <h1>{message}</h1>
+      <p>{details}</p>
+      {stack ? (
+        <pre className="w-full overflow-x-auto p-4">
+          <code>{stack}</code>
+        </pre>
+      ) : null}
+    </main>
+  );
 }
